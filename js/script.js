@@ -6,11 +6,17 @@ let inputLong = document.querySelector(".input_long");
 let promodoTime;
 let shortTime;
 let longTime;
-let min = 2;
-let sec = 2;
+let min;
+let sec;
 let t;
-let second = document.querySelector(".minute-timer");
-let minuts = document.querySelector(".second-timer");
+let minuts = document.querySelector(".minute-timer");
+let second = document.querySelector(".second-timer");
+let time1 = new Date();
+let time2;
+let nextMinuts;
+let nextHours;
+let hourTime = document.querySelector(".minute-time");
+let minutTime = document.querySelector(".second-time")
 
 openSettings.addEventListener("click", openMenuSettings);
 function openMenuSettings() {
@@ -39,47 +45,60 @@ function changeTopic() {
     });
 }
 
-let keyTopics = JSON.parse(localStorage.getItem("theme"));
-
+let keyTopic = JSON.parse(localStorage.getItem("theme"));
 if (keyTopic == true) {
-    changeThemes.forEach(element => {
-        document.body.classList.toggle("themeBody");
-    });
+    document.body.classList.toggle("themeBody")
 }
 
 let selectMusic = document.querySelector(".currency");
 let music;
-let audio;
+let audio1 = new Audio("musics/bell.mp3");
+let audio2 = new Audio("musics/bird.mp3");
+let audio3 = new Audio("musics/relax.mp3");
+let audio4 = new Audio("musics/digital.mp3");
+let audio5 = new Audio("musics/beer.mp3");
 
-musicFunction = function () {
+function musicFunction() {
     music = selectMusic.value;
-    localStorage.setItem("melody", JSON.stringify(music))
+    localStorage.setItem("melody", JSON.stringify(music));
 }
 
-music = JSON.parse(localStorage.getItem("melody"));
-if (music == "bell") {
+function playAlarm() {
+    music = JSON.parse(localStorage.getItem("melody"))
     console.log(music);
-    audio = new Audio("musics/bell.mp3");
-    audio.play();
-}
-if (music == "bird") {
-    console.log(music);
-}
-if (music == "relax") {
-    console.log(music);
-}
-if (music == "digital") {
-    console.log(music);
-}
-if (music == "beer") {
-    console.log(music);
+    if (music === "bell") {
+        console.log(music);
+        audio1.play();
+    }
+    if (music === "bird") {
+        console.log(music);
+        audio2.play();
+    }
+    if (music === "relax") {
+        console.log(music);
+        audio3.play();
+    }
+    if (music === "digital") {
+        console.log(music);
+        audio4.play();
+    }
+    if (music === "beer") {
+        console.log(music);
+        audio5.play();
+    }
 }
 
 inputPromodo.addEventListener("keypress", startPromodo);
 function startPromodo(evt){
     if (evt.keyCode == 13) {
         promodoTime = inputPromodo.value;
-        console.log(`Время работы:` + promodoTime)
+        min = promodoTime;
+        console.log(`Время работы:` + promodoTime);
+        time2 = new Date(+time1 + `${promodoTime}` * 6e4);
+        nextMinuts = time2.getMinutes();
+        nextHours = time2.getHours();
+        hourTime.innerHTML = nextHours + `:`;
+        minutTime.innerHTML = print(nextMinuts);
         funcStart();
     }
 }
@@ -88,7 +107,13 @@ inputShort.addEventListener("keypress", startShort);
 function startShort(evt){
     if (evt.keyCode == 13) {
         shortTime = inputShort.value;
-        console.log(`Время короткого:` + shortTime)
+        min = shortTime;
+        time2 = new Date(+time1 + `${shortTime}` * 6e4);
+        console.log(`Время короткого:` + shortTime);
+        nextMinuts = time2.getMinutes();
+        nextHours = time2.getHours();
+        hourTime.innerHTML = nextHours + `:`;
+        minutTime.innerHTML = print(nextMinuts);
         funcStart();
     }
 }
@@ -97,36 +122,47 @@ inputLong.addEventListener("keypress", startLong);
 function startLong(evt){
     if (evt.keyCode == 13) {
         longTime = inputShort.value;
-        console.log(`Время короткого:` + longTime)
+        min = longTime;
+        time2 = new Date(+time1 + `${longTime}` * 6e4);
+        console.log(`Время короткого:` + longTime);
+        nextMinuts = time2.getMinutes();
+        nextHours = time2.getHours();
+        hourTime.innerHTML = nextHours + `:`;
+        minutTime.innerHTML = print(nextMinuts);
         funcStart();
     }
 }
 
 function funcStart() {
-    setInterval(startTime, 1000);
+    t = setInterval(startTime, 1000);
 }
-
-
 
 function startTime() {
     if (sec > 0) {
         sec--;
         second.innerHTML = print(sec);
     } else {
-        sec = 5;
+        sec = 59;
         min--;
         second.innerHTML = print(sec);
     }
     if (min >= 0) {
-        minuts.innerHTML = print(min);
-    } else {
-        min = 0;
-        minuts.innerHTML = print(min);
+        minuts.innerHTML = print(min) + `:`;
     }
-    if(sec==0 && min==0){
-        musicFunction();
+    if(min==1){
+        notifSet ();
+    }
+    else {
+        min = 0;
+        minuts.innerHTML = print(min) + `:`;
+    }
+    if(sec===0 && min===0){
+        clearInterval(t);
         min = 0;
         sec = 0;
+        second.innerHTML = sec;
+        minuts.innerHTML = min;
+        playAlarm();
     }
 }
 
@@ -135,5 +171,28 @@ function print(e) {
         return "0" + e;
     } else {
         return e;
+    }
+}
+
+function notifyMe () {
+    let notification = new Notification ("Все еще работаешь?", {
+        tag : "ache-mail",
+        body : "Пора сделать паузу и отдохнуть",
+        icon : "https://itproger.com/img/notify.png"
+    });
+}
+
+function notifSet () {
+    if (!("Notification" in window))
+        alert ("Ваш браузер не поддерживает уведомления.");
+    else if (Notification.permission === "granted")
+        setTimeout(notifyMe, 2000);
+    else if (Notification.permission !== "denied") {
+        Notification.requestPermission (function (permission) {
+            if (!('permission' in Notification))
+                Notification.permission = permission;
+            if (permission === "granted")
+                setTimeout(notifyMe, 2000);
+        });
     }
 }
