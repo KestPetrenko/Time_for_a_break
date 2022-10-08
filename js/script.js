@@ -29,15 +29,22 @@ function hideСontainerSetting() {
     containerSettings.classList.toggle("none")
 }
 
+const changeThemes = document.querySelectorAll("[data-theme]");
+
 let theme = document.querySelector(".check").addEventListener("click", changeTopic);
 function changeTopic() {
-    let keyTopic = document.body.classList.toggle("themeBody")
-    localStorage.setItem("theme", JSON.stringify(keyTopic))
+    changeThemes.forEach(element =>{
+        let keyTopic = element.classList.toggle("themeBody");
+        localStorage.setItem("theme", JSON.stringify(keyTopic));
+    });
 }
 
-let keyTopic = JSON.parse(localStorage.getItem("theme"));
+let keyTopics = JSON.parse(localStorage.getItem("theme"));
+
 if (keyTopic == true) {
-    document.body.classList.toggle("themeBody")
+    changeThemes.forEach(element => {
+        document.body.classList.toggle("themeBody");
+    });
 }
 
 let selectMusic = document.querySelector(".currency");

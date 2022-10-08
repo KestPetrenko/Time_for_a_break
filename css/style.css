@@ -8,6 +8,10 @@
     background: rgba(36, 36, 38, 1);
 }
 
+.themeBody {
+    background: #636D73;
+}
+
 body {
     position: relative;
 }
@@ -361,10 +365,6 @@ body {
     display: none;
 }
 
-.themeBody {
-    background-color: #4bd863;
-}
-
 .btn-save {
     display: block;
     margin: 50px auto;
@@ -389,8 +389,8 @@ body {
         width: 145px;
     }
     .timer__box {
-        width: 280px;
-        height: 280px;
+        width: 265px;
+        height: 265px;
     }
     .title_fz120 {
         font-size: 85px;
