@@ -34,6 +34,7 @@ body {
     font-size: 14px;
     color: #fff;
     transition: all 1s;
+    cursor: pointer;
 }
 
 .btn:hover, btn:focus {
