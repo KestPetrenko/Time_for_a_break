@@ -53,12 +53,12 @@ if (keyTopic == true) {
 }
 
 let selectMusic = document.querySelector(".currency");
-let music;
 let audio1 = new Audio("musics/bell.mp3");
 let audio2 = new Audio("musics/bird.mp3");
 let audio3 = new Audio("musics/relax.mp3");
 let audio4 = new Audio("musics/digital.mp3");
 let audio5 = new Audio("musics/beer.mp3");
+let music = "bird";
 
 function musicFunction() {
     music = selectMusic.value;
