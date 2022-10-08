@@ -39,15 +39,17 @@ const changeThemes = document.querySelectorAll("[data-theme]");
 
 let theme = document.querySelector(".check").addEventListener("click", changeTopic);
 function changeTopic() {
-    changeThemes.forEach(element =>{
-        let keyTopic = element.classList.toggle("themeBody");
+    for(let i of changeThemes){
+        let keyTopic = i.classList.toggle("themeBody");
         localStorage.setItem("theme", JSON.stringify(keyTopic));
-    });
+    }
 }
 
 let keyTopic = JSON.parse(localStorage.getItem("theme"));
 if (keyTopic == true) {
-    document.body.classList.toggle("themeBody")
+    for (let i of changeThemes) {
+        i.classList.toggle("themeBody")
+    }
 }
 
 let selectMusic = document.querySelector(".currency");
