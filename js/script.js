@@ -90,43 +90,15 @@ function playAlarm() {
     }
 }
 
-inputPromodo.addEventListener("keypress", startPromodo);
-function startPromodo(evt){
-    if (evt.keyCode == 13) {
-        promodoTime = inputPromodo.value;
-        min = promodoTime;
-        console.log(`Время работы:` + promodoTime);
-        time2 = new Date(+time1 + `${promodoTime}` * 6e4);
-        nextMinuts = time2.getMinutes();
-        nextHours = time2.getHours();
-        hourTime.innerHTML = nextHours + `:`;
-        minutTime.innerHTML = print(nextMinuts);
-        funcStart();
-    }
-}
+inputPromodo.addEventListener("keypress", startPeriod);
+inputShort.addEventListener("keypress", startPeriod);
+inputLong.addEventListener("keypress", startPeriod);
 
-inputShort.addEventListener("keypress", startShort);
-function startShort(evt){
-    if (evt.keyCode == 13) {
-        shortTime = inputShort.value;
-        min = shortTime;
-        time2 = new Date(+time1 + `${shortTime}` * 6e4);
-        console.log(`Время короткого:` + shortTime);
-        nextMinuts = time2.getMinutes();
-        nextHours = time2.getHours();
-        hourTime.innerHTML = nextHours + `:`;
-        minutTime.innerHTML = print(nextMinuts);
-        funcStart();
-    }
-}
-
-inputLong.addEventListener("keypress", startLong);
-function startLong(evt){
+function startPeriod(evt){
     if (evt.keyCode == 13) {
         longTime = inputShort.value;
         min = longTime;
         time2 = new Date(+time1 + `${longTime}` * 6e4);
-        console.log(`Время короткого:` + longTime);
         nextMinuts = time2.getMinutes();
         nextHours = time2.getHours();
         hourTime.innerHTML = nextHours + `:`;

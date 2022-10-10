@@ -10,7 +10,7 @@
 
 
 .themeBody {
-    background: #636D73;
+    background: rgb(217, 85, 80);
 }
 
 body {
@@ -192,7 +192,7 @@ body {
     text-transform: uppercase;
     font-size: 1.5vw;
     padding: 2%;
-    color: grey;
+    color: #ffffff;
     margin: 2% auto;
 }
 
@@ -206,7 +206,7 @@ body {
 
 .unicode {
     width: 2.5vw;
-    color: grey;
+    color: #ffffff;
     cursor: pointer;
 }
 
@@ -225,7 +225,7 @@ body {
 .work h3,
 .short__break h3,
 .long__break h3 {
-    color: grey;
+    color: #ffffff;
     margin: 3%;
     font-size: 1.1vw;
 }
@@ -295,7 +295,7 @@ body {
 }
 
 .check:checked~.track {
-    box-shadow: inset 0 0 0 20px #4bd863;
+    box-shadow: inset 0 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .check:checked~.switch {
@@ -318,7 +318,7 @@ body {
     transition: .35s cubic-bezier(0.785, 0.135, 0.150, 0.860);
     transition-property: left, right;
     transition-delay: 0s, .05s;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .track {
@@ -328,7 +328,7 @@ body {
     right: 0;
     bottom: 0;
     transition: .35s cubic-bezier(0.785, 0.135, 0.150, 0.860);
-    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .2);
     border-radius: 40px;
 }
 
@@ -404,4 +404,4 @@ body {
         margin-right: 40px;
     }
 
-    }
+}
