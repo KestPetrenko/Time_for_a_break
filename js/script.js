@@ -140,9 +140,11 @@ function funcStart() {
 }
 
 function startTime() {
+    let secCircle = document.querySelector(".circle");
     if (sec > 0) {
         sec--;
         second.innerHTML = print(sec);
+        secCircle.style.strokeDasharray = `${sec * 1.666}, 100`;
     } else {
         sec = 59;
         min--;
