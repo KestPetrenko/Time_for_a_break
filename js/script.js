@@ -161,9 +161,9 @@ function funcSave() {
 timeWork.addEventListener("click", startPromodo)
 
 function startPromodo() {
-    reset();
     promodoTime = JSON.parse(localStorage.getItem("work"));
     min = promodoTime;
+    sec = 0;
     minuts.innerHTML = promodoTime + `:`;
     console.log(`Время работы:` + promodoTime);
     time2 = new Date(+time1 + `${promodoTime}` * 6e4);
@@ -177,9 +177,9 @@ function startPromodo() {
 timeLong.addEventListener("click", startLong)
 
 function startLong() {
-    reset();
     longTime = JSON.parse(localStorage.getItem("long"));
     min = longTime;
+    sec = 0;
     minuts.innerHTML = longTime + `:`;
     console.log(`Время работы:` + longTime);
     time2 = new Date(+time1 + `${longTime}` * 6e4);
@@ -193,9 +193,9 @@ function startLong() {
 timeShort.addEventListener("click", startShort);
 
 function startShort() {
-    reset();
     shortTime = JSON.parse(localStorage.getItem("short"));
     min = shortTime;
+    sec = 0;
     minuts.innerHTML = shortTime + `:`;
     time2 = new Date(+time1 + `${shortTime}` * 6e4);
     console.log(`Время короткого:` + shortTime);
@@ -206,20 +206,20 @@ function startShort() {
     funcStart();
 }
 
-function reset() {
-    min = 0;
-    sec = 0
+
+let myTimer;
+function funcStart() {
+    window.clearInterval(myTimer);
+     myTimer = window.setInterval(startTime, 1000);
 }
 
-function funcStart() {
-    t = 0;
-    setInterval(startTime, t+1000);
-}
+let secCircle = document.querySelector(".circle");
 
 function startTime() {
     if (sec > 0) {
         sec--;
         second.innerHTML = print(sec);
+        secCircle.style.strokeDasharray = `${sec * 1.666}, 100`;
     } else {
         sec = 59;
         min--;
@@ -232,7 +232,7 @@ function startTime() {
         minuts.innerHTML = print(min) + `:`;
     }
     if (sec === 0 && min === 0) {
-        clearInterval(t);
+        window.clearInterval(myTimer);
         min = 0;
         sec = 0;
         second.innerHTML = sec;
@@ -248,3 +248,5 @@ function print(e) {
         return e;
     }
 }
+
+
