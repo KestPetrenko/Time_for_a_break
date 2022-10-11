@@ -110,16 +110,16 @@
         <h2 data-theme="theme">Time (minutes)</h2>
         <div class="content__time" data-theme="theme">
             <div class="work" data-theme="theme">
-                <h3 data-theme="theme">Auto</h3>
-                <input type="number" name="" class="input_promodo" min="10" max="90" value="30">
+                <h3 data-theme="theme" class="settings_h3">Auto</h3>
+                <input type="number" name="" class="input_settings input_promodo" min="10" max="90" value="30">
             </div>
             <div class="short__break" data-theme="theme">
-                <h3 data-theme="theme">Short Break</h3>
-                <input type="number" name="" class="input_short" min="5" max="15" value="5">
+                <h3 data-theme="theme" class="settings_h3">Short Break</h3>
+                <input type="number" name="" class="input_settings input_short" min="5" max="15" value="5">
             </div>
             <div class="long__break" data-theme="theme">
-                <h3 data-theme="theme">Long Break</h3>
-                <input type="number" name="" class="input_long" min="15" max="60" value="15">
+                <h3 data-theme="theme" class="settings_h3">Long Break</h3>
+                <input type="number" name="" class="input_settings input_long" min="15" max="60" value="15">
 
             </div>
         </div>
@@ -127,7 +127,7 @@
     <div class="div_music" data-theme="theme">
         <h2 data-theme="theme">Alarm Sound</h2>
         <form class="form_currency" data-theme="theme">
-            <select name="currency" class="currency" onchange="musicFunction()">
+            <select name="currency" class="input_settings currency" onchange="musicFunction()">
                 <option value="bell">bell</option>
                 <option value="bird">bird</option>
                 <option value="relax">relax</option>
@@ -150,6 +150,10 @@
             <option value="24_hour" selected>24 hour</option>
             <option value="12_hour">12 hour</option>
         </select>
+    </div>
+    <div class="notification">
+        <h2 data-theme="theme">Remind the end</h2>
+        <input type="number" name="" class="input_settings notification_input" value="5">
     </div>
 
     <div class="timer__save" data-theme="theme">

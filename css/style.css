@@ -108,7 +108,7 @@ body {
 
 @keyframes progress {
     0% {
-        stroke-dasharray: 0 100;
+        stroke-dasharray: 100 0;
     }
 }
 
@@ -129,13 +129,13 @@ body {
     fill: none;
     stroke-width: 0.5;
     stroke-linecap: round;
-    animation: progress 1s ease-out forwards;
+    animation: progress 1s ease-out backwards;
     stroke: #f5ac0e;
 }
 
-@keyframes progress {
+@keyframes circle {
     0% {
-        stroke-dasharray: 0 100;
+        stroke-dashoffset: 0;
     }
 }
 
@@ -282,7 +282,7 @@ body {
     font-size: 1.4vw;
 }
 
-.content__time input {
+.input_settings {
     width: 84%;
     font-size: 2vw;
     background-color: rgba(255, 255, 255, 0.2);
@@ -305,6 +305,17 @@ body {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.notification {
+    display: flex;
+    padding: 15px 0;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.notification_input {
+    width: 25%;
 }
 
 .b {
