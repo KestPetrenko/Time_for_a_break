@@ -17,8 +17,14 @@ let nextMinuts;
 let nextHours;
 let hourTime = document.querySelector(".minute-time");
 let minutTime = document.querySelector(".second-time")
+let save = document.querySelector(".btn-save");
+let timeWork = document.querySelector(".btn-auto");
+let timeLong = document.querySelector(".btn-long");
+let timeShort = document.querySelector(".btn-short");
+
 
 openSettings.addEventListener("click", openMenuSettings);
+
 function openMenuSettings() {
     containerSettings.classList.toggle("none")
 }
@@ -31,6 +37,7 @@ hourFunction = function () {
 }
 
 document.querySelector(".unicode").addEventListener("click", hideСontainerSetting);
+
 function hideСontainerSetting() {
     containerSettings.classList.toggle("none")
 }
@@ -38,8 +45,9 @@ function hideСontainerSetting() {
 const changeThemes = document.querySelectorAll("[data-theme]");
 
 let theme = document.querySelector(".check").addEventListener("click", changeTopic);
+
 function changeTopic() {
-    for(let i of changeThemes){
+    for (let i of changeThemes) {
         let keyTopic = i.classList.toggle("themeBody");
         localStorage.setItem("theme", JSON.stringify(keyTopic));
     }
@@ -53,90 +61,159 @@ if (keyTopic == true) {
 }
 
 let selectMusic = document.querySelector(".currency");
-let audio1 = new Audio("musics/bell.mp3");
-let audio2 = new Audio("musics/bird.mp3");
-let audio3 = new Audio("musics/relax.mp3");
-let audio4 = new Audio("musics/digital.mp3");
-let audio5 = new Audio("musics/beer.mp3");
-let music = "bird";
+console.log(selectMusic.value)
+
+let arrSound = ["musics/bell.mp3", "musics/bird.mp3", "musics/relax.mp3", "musics/digital.mp3", "musics/beer.mp3"]
+let audio = new Audio();
 
 function musicFunction() {
     music = selectMusic.value;
-    localStorage.setItem("melody", JSON.stringify(music));
+    if (music === "bell") {
+        audio.src = arrSound[0];
+        audio.play();
+    }
+    if (music === "bird") {
+        audio.src = arrSound[1];
+        audio.play();
+    }
+    if (music === "relax") {
+        audio.src = arrSound[2];
+        audio.play();
+    }
+    if (music === "digital") {
+        audio.src = arrSound[3];
+        audio.play();
+    }
+    if (music === "beer") {
+        audio.src = arrSound[4];
+        audio.play();
+    }
 }
 
 function playAlarm() {
     music = JSON.parse(localStorage.getItem("melody"))
-    console.log(music);
+    if (music === null) {
+        audio.src = arrSound[1];
+        audio.play();
+    }
     if (music === "bell") {
-        console.log(music);
-        audio1.play();
+        audio.src = arrSound[0];
+        audio.play();
     }
     if (music === "bird") {
-        console.log(music);
-        audio2.play();
+        audio.src = arrSound[1];
+        audio.play();
     }
     if (music === "relax") {
-        console.log(music);
-        audio3.play();
+        audio.src = arrSound[2];
+        audio.play();
     }
     if (music === "digital") {
-        console.log(music);
-        audio4.play();
+        audio.src = arrSound[3];
+        audio.play();
     }
     if (music === "beer") {
-        console.log(music);
-        audio5.play();
+        audio.src = arrSound[4];
+        audio.play();
     }
 }
 
-inputPromodo.addEventListener("keypress", startPromodo);
-function startPromodo(evt){
-    if (evt.keyCode == 13) {
-        promodoTime = inputPromodo.value;
-        min = promodoTime;
-        console.log(`Время работы:` + promodoTime);
-        time2 = new Date(+time1 + `${promodoTime}` * 6e4);
-        nextMinuts = time2.getMinutes();
-        nextHours = time2.getHours();
-        hourTime.innerHTML = nextHours + `:`;
-        minutTime.innerHTML = print(nextMinuts);
-        funcStart();
+function notifyMe() {
+    let notification = new Notification("Все еще работаешь?", {
+        tag: "ache-mail",
+        body: "Пора сделать паузу и отдохнуть",
+        icon: "..."
+    });
+}
+
+function notifSet() {
+    if (!("Notification" in window))
+        alert("Ваш браузер не поддерживает уведомления.");
+    else if (Notification.permission === "granted")
+        setTimeout(notifyMe, 2000);
+    else if (Notification.permission !== "denied") {
+        Notification.requestPermission(function (permission) {
+            if (!('permission' in Notification))
+                Notification.permission = permission;
+            if (permission === "granted")
+                setTimeout(notifyMe, 2000);
+        });
     }
 }
 
-inputShort.addEventListener("keypress", startShort);
-function startShort(evt){
-    if (evt.keyCode == 13) {
-        shortTime = inputShort.value;
-        min = shortTime;
-        time2 = new Date(+time1 + `${shortTime}` * 6e4);
-        console.log(`Время короткого:` + shortTime);
-        nextMinuts = time2.getMinutes();
-        nextHours = time2.getHours();
-        hourTime.innerHTML = nextHours + `:`;
-        minutTime.innerHTML = print(nextMinuts);
-        funcStart();
-    }
+
+save.addEventListener("click", funcSave);
+
+function funcSave() {
+    promodoTime = inputPromodo.value;
+    localStorage.setItem("work", JSON.stringify(promodoTime));
+
+    shortTime = inputShort.value;
+    localStorage.setItem("short", JSON.stringify(shortTime));
+
+    longTime = inputLong.value;
+    localStorage.setItem("long", JSON.stringify(longTime));
+
+    music = selectMusic.value;
+    localStorage.setItem("melody", JSON.stringify(music));
 }
 
-inputLong.addEventListener("keypress", startLong);
-function startLong(evt){
-    if (evt.keyCode == 13) {
-        longTime = inputShort.value;
-        min = longTime;
-        time2 = new Date(+time1 + `${longTime}` * 6e4);
-        console.log(`Время короткого:` + longTime);
-        nextMinuts = time2.getMinutes();
-        nextHours = time2.getHours();
-        hourTime.innerHTML = nextHours + `:`;
-        minutTime.innerHTML = print(nextMinuts);
-        funcStart();
-    }
+timeWork.addEventListener("click", startPromodo)
+
+function startPromodo() {
+    reset();
+    promodoTime = JSON.parse(localStorage.getItem("work"));
+    min = promodoTime;
+    minuts.innerHTML = promodoTime + `:`;
+    console.log(`Время работы:` + promodoTime);
+    time2 = new Date(+time1 + `${promodoTime}` * 6e4);
+    nextMinuts = time2.getMinutes();
+    nextHours = time2.getHours();
+    hourTime.innerHTML = nextHours + `:`;
+    minutTime.innerHTML = print(nextMinuts);
+    funcStart();
+}
+
+timeLong.addEventListener("click", startLong)
+
+function startLong() {
+    reset();
+    longTime = JSON.parse(localStorage.getItem("long"));
+    min = longTime;
+    minuts.innerHTML = longTime + `:`;
+    console.log(`Время работы:` + longTime);
+    time2 = new Date(+time1 + `${longTime}` * 6e4);
+    nextMinuts = time2.getMinutes();
+    nextHours = time2.getHours();
+    hourTime.innerHTML = nextHours + `:`;
+    minutTime.innerHTML = print(nextMinuts);
+    funcStart();
+}
+
+timeShort.addEventListener("click", startShort);
+
+function startShort() {
+    reset();
+    shortTime = JSON.parse(localStorage.getItem("short"));
+    min = shortTime;
+    minuts.innerHTML = shortTime + `:`;
+    time2 = new Date(+time1 + `${shortTime}` * 6e4);
+    console.log(`Время короткого:` + shortTime);
+    nextMinuts = time2.getMinutes();
+    nextHours = time2.getHours();
+    hourTime.innerHTML = nextHours + `:`;
+    minutTime.innerHTML = print(nextMinuts);
+    funcStart();
+}
+
+function reset() {
+    min = 0;
+    sec = 0
 }
 
 function funcStart() {
-    t = setInterval(startTime, 1000);
+    t = 0;
+    setInterval(startTime, t+1000);
 }
 
 function startTime() {
@@ -150,15 +227,11 @@ function startTime() {
     }
     if (min >= 0) {
         minuts.innerHTML = print(min) + `:`;
+    } else {
+        min = 0;
+        minuts.innerHTML = print(min) + `:`;
     }
-    if(min==1){
-        notifSet ();
-    }
-    // else {
-    //     min = 0;
-    //     minuts.innerHTML = print(min) + `:`;
-    // }
-    if(sec===0 && min===0){
+    if (sec === 0 && min === 0) {
         clearInterval(t);
         min = 0;
         sec = 0;
@@ -173,28 +246,5 @@ function print(e) {
         return "0" + e;
     } else {
         return e;
-    }
-}
-
-function notifyMe () {
-    let notification = new Notification ("Все еще работаешь?", {
-        tag : "ache-mail",
-        body : "Пора сделать паузу и отдохнуть",
-        icon : "..."
-    });
-}
-
-function notifSet () {
-    if (!("Notification" in window))
-        alert ("Ваш браузер не поддерживает уведомления.");
-    else if (Notification.permission === "granted")
-        setTimeout(notifyMe, 2000);
-    else if (Notification.permission !== "denied") {
-        Notification.requestPermission (function (permission) {
-            if (!('permission' in Notification))
-                Notification.permission = permission;
-            if (permission === "granted")
-                setTimeout(notifyMe, 2000);
-        });
     }
 }
