@@ -21,6 +21,7 @@ let save = document.querySelector(".btn-save");
 let timeWork = document.querySelector(".btn-auto");
 let timeLong = document.querySelector(".btn-long");
 let timeShort = document.querySelector(".btn-short");
+let notification = document.querySelector(".notification_input");
 
 
 openSettings.addEventListener("click", openMenuSettings);
@@ -63,7 +64,7 @@ if (keyTopic == true) {
 let selectMusic = document.querySelector(".currency");
 console.log(selectMusic.value)
 
-let arrSound = ["musics/bell.mp3", "musics/bird.mp3", "musics/relax.mp3", "musics/digital.mp3", "musics/beer.mp3"]
+let arrSound = ["musics/bell.mp3", "musics/bird.mp3", "musics/relax.mp3", "musics/digital.mp3", "musics/beer.mp3", "musics/metronom.mp3", "musics/haaa.mp3"]
 let audio = new Audio();
 
 function musicFunction() {
@@ -88,6 +89,16 @@ function musicFunction() {
         audio.src = arrSound[4];
         audio.play();
     }
+}
+
+function playAlarm_notification(){
+    audio.src = arrSound[5];
+    audio.play();
+}
+
+function come_back(){
+    audio.src = arrSound[6];
+    audio.play();
 }
 
 function playAlarm() {
@@ -118,30 +129,6 @@ function playAlarm() {
     }
 }
 
-function notifyMe() {
-    let notification = new Notification("Все еще работаешь?", {
-        tag: "ache-mail",
-        body: "Пора сделать паузу и отдохнуть",
-        icon: "..."
-    });
-}
-
-function notifSet() {
-    if (!("Notification" in window))
-        alert("Ваш браузер не поддерживает уведомления.");
-    else if (Notification.permission === "granted")
-        setTimeout(notifyMe, 2000);
-    else if (Notification.permission !== "denied") {
-        Notification.requestPermission(function (permission) {
-            if (!('permission' in Notification))
-                Notification.permission = permission;
-            if (permission === "granted")
-                setTimeout(notifyMe, 2000);
-        });
-    }
-}
-
-
 save.addEventListener("click", funcSave);
 
 function funcSave() {
@@ -156,6 +143,9 @@ function funcSave() {
 
     music = selectMusic.value;
     localStorage.setItem("melody", JSON.stringify(music));
+
+    notification = notification.value;
+    localStorage.setItem("timeNotification", JSON.stringify(notification));
 }
 
 timeWork.addEventListener("click", startPromodo)
@@ -208,15 +198,21 @@ function startShort() {
 
 
 let myTimer;
+
 function funcStart() {
     window.clearInterval(myTimer);
-     myTimer = window.setInterval(startTime, 1000);
+    myTimer = window.setInterval(startTime, 1000);
 }
 
 let secCircle = document.querySelector(".circle");
 
+notification = JSON.parse(localStorage.getItem("timeNotification"));
+let n = Number(notification);
+
 function startTime() {
-    let secCircle = document.querySelector(".circle");
+    if (min === n && sec === 0) {
+        playAlarm_notification();
+    }
     if (sec > 0) {
         sec--;
         second.innerHTML = print(sec);
@@ -251,27 +247,15 @@ function print(e) {
 }
 
 
-function notifyMe () {
-    let notification = new Notification ("Все еще работаешь?", {
-        tag : "ache-mail",
-        body : "Пора сделать паузу и отдохнуть",
-        icon : "..."
-    });
-}
+let mytime = mytime1 = 5;
+document.onmousemove = document.onkeydown = document.onscroll = function(){mytime = mytime1};
+setInterval(function(){
+    console.log(mytime);
+    mytime --;
+    if(mytime <=0 )
+        come_back();
+}, 1000);
 
-function notifSet () {
-    if (!("Notification" in window))
-        alert ("Ваш браузер не поддерживает уведомления.");
-    else if (Notification.permission === "granted")
-        setTimeout(notifyMe, 2000);
-    else if (Notification.permission !== "denied") {
-        Notification.requestPermission (function (permission) {
-            if (!('permission' in Notification))
-                Notification.permission = permission;
-            if (permission === "granted")
-                setTimeout(notifyMe, 2000);
-        });
-    }
-}
+
 
 
