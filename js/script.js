@@ -18,7 +18,7 @@ let nextHours;
 let hourTime = document.querySelector(".minute-time");
 let minutTime = document.querySelector(".second-time")
 let save = document.querySelector(".btn-save");
-let timeWork = document.querySelector(".btn-auto");
+let timeWork = document.querySelector(".btn-work");
 let timeLong = document.querySelector(".btn-long");
 let timeShort = document.querySelector(".btn-short");
 let notification = document.querySelector(".notification_input");
@@ -147,6 +147,9 @@ timeWork.addEventListener("click", startPromodo)
 
 function startPromodo() {
     promodoTime = JSON.parse(localStorage.getItem("work"));
+    timeShort.classList.remove("btn-auto");
+    timeLong.classList.remove("btn-auto");
+    timeWork.classList.add("btn-auto");
     min = promodoTime;
     sec = 0;
     minuts.innerHTML = promodoTime + `:`;
@@ -162,6 +165,9 @@ timeLong.addEventListener("click", startLong)
 
 function startLong() {
     longTime = JSON.parse(localStorage.getItem("long"));
+    timeShort.classList.remove("btn-auto");
+    timeLong.classList.add("btn-auto");
+    timeWork.classList.remove("btn-auto");
     min = longTime;
     sec = 0;
     minuts.innerHTML = longTime + `:`;
@@ -178,6 +184,9 @@ timeShort.addEventListener("click", startShort);
 
 function startShort() {
     shortTime = JSON.parse(localStorage.getItem("short"));
+    timeShort.classList.add("btn-auto");
+    timeLong.classList.remove("btn-auto");
+    timeWork.classList.remove("btn-auto");
     min = shortTime;
     sec = 0;
     minuts.innerHTML = shortTime + `:`;
@@ -245,6 +254,7 @@ function print(e) {
 idl = JSON.parse(localStorage.getItem("timeIdle"));
 let i = Number(idl);
 let sumI = (i*60);
+console.log(sumI)
 
 function inaction() {
     let mytime = mytime1 = `${sumI}`;
