@@ -25,6 +25,7 @@ let notification = document.querySelector(".notification_input");
 let notif = document.querySelector(".notification_input");
 let idle = document.querySelector(".reminder");
 let start = document.querySelector(".btn-start");
+let stop = document.querySelector(".btn_stop");
 
 
 
@@ -141,6 +142,8 @@ function funcSave() {
 
     idl = idle.value;
     localStorage.setItem("timeIdle", JSON.stringify(idl));
+
+    hideСontainerSetting();
 }
 
 timeWork.addEventListener("click", startPromodo)
@@ -207,6 +210,18 @@ start.addEventListener("click", funcStart);
 function funcStart() {
         window.clearInterval(myTimer);
         myTimer = window.setInterval(startTime, 1000);
+        start.disabled = true;
+        start.classList.toggle("none");
+        stop.classList.toggle("none");
+}
+
+stop.addEventListener("click", funcStop);
+function funcStop(){
+    clearInterval(myTimer);
+    start.disabled = false;
+    start.classList.toggle("none");
+    stop.classList.toggle("none");
+    inaction();
 }
 
 let secCircle = document.querySelector(".circle");
