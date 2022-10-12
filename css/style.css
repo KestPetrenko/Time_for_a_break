@@ -452,15 +452,36 @@ body {
     .header__list {
         flex-direction: column;
     }
+    .header__wrapper {
+        padding-left: 10px;
+    }
     .header__item {
-        margin-bottom: 15px;
+        margin: 0 0 15px 0;
     }
     .header__btn {
         width: 145px;
     }
+    .timer {
+        padding: 0;
+    }
+    .timer__box-wrapper {
+        top: 55%;
+    }
+    .title_fz90 {
+        font-size: 60px;
+    }
+    .timer__start-btn {
+        padding: 10px 20px;
+    }
     .timer__box {
-        width: 265px;
-        height: 265px;
+        width: 500px;
+        height: 500px;
+    }
+    .timer__wrapper {
+        width: 100%;
+    }
+    .circular-chart {
+        width: 500px;
     }
     .title_fz120 {
         font-size: 85px;
@@ -470,7 +491,32 @@ body {
         height: 80px;
     }
     .btn_round:not(:last-child) {
-        margin-right: 40px;
+        margin-right: 20px;
     }
-
+    .title {
+        font-size: 3.5vw;
+        margin: 10px;
+    }
+    .unicode {
+        margin-left: 60px;
+    }
+    .container__title {
+        justify-content: center;
+    }
+    .content h2 {
+        font-size: 4.4vw;
+    }
+    .settings_h3 {
+        font-size: 3.1vw !important;
+    }
+    .input_settings {
+        font-size: 4vw;
+    }
+    .currency__hour {
+        font-size: 4vw;
+    }
+    .toggle {
+        width: 16vw;
+        height: 7vw;
+    }
 }
