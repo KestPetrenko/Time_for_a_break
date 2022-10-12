@@ -22,6 +22,10 @@ let timeWork = document.querySelector(".btn-auto");
 let timeLong = document.querySelector(".btn-long");
 let timeShort = document.querySelector(".btn-short");
 let notification = document.querySelector(".notification_input");
+let notif = document.querySelector(".notification_input");
+let idle = document.querySelector(".reminder");
+let start = document.querySelector(".btn-start");
+
 
 
 openSettings.addEventListener("click", openMenuSettings);
@@ -30,12 +34,6 @@ function openMenuSettings() {
     containerSettings.classList.toggle("none")
 }
 
-let selectHour = document.querySelector(".currency__hour");
-let hour;
-hourFunction = function () {
-    hour = selectHour.value;
-    console.log(hour);
-}
 
 document.querySelector(".unicode").addEventListener("click", hideСontainerSetting);
 
@@ -91,13 +89,8 @@ function musicFunction() {
     }
 }
 
-function playAlarm_notification(){
+function playAlarm_notification() {
     audio.src = arrSound[5];
-    audio.play();
-}
-
-function come_back(){
-    audio.src = arrSound[6];
     audio.play();
 }
 
@@ -130,7 +123,6 @@ function playAlarm() {
 }
 
 save.addEventListener("click", funcSave);
-
 function funcSave() {
     promodoTime = inputPromodo.value;
     localStorage.setItem("work", JSON.stringify(promodoTime));
@@ -144,8 +136,11 @@ function funcSave() {
     music = selectMusic.value;
     localStorage.setItem("melody", JSON.stringify(music));
 
-    notification = notification.value;
+    notification = notif.value;
     localStorage.setItem("timeNotification", JSON.stringify(notification));
+
+    idl = idle.value;
+    localStorage.setItem("timeIdle", JSON.stringify(idl));
 }
 
 timeWork.addEventListener("click", startPromodo)
@@ -161,7 +156,6 @@ function startPromodo() {
     nextHours = time2.getHours();
     hourTime.innerHTML = nextHours + `:`;
     minutTime.innerHTML = print(nextMinuts);
-    funcStart();
 }
 
 timeLong.addEventListener("click", startLong)
@@ -177,10 +171,10 @@ function startLong() {
     nextHours = time2.getHours();
     hourTime.innerHTML = nextHours + `:`;
     minutTime.innerHTML = print(nextMinuts);
-    funcStart();
 }
 
 timeShort.addEventListener("click", startShort);
+
 
 function startShort() {
     shortTime = JSON.parse(localStorage.getItem("short"));
@@ -193,15 +187,16 @@ function startShort() {
     nextHours = time2.getHours();
     hourTime.innerHTML = nextHours + `:`;
     minutTime.innerHTML = print(nextMinuts);
-    funcStart();
 }
 
 
 let myTimer;
 
+start.addEventListener("click", funcStart);
+
 function funcStart() {
-    window.clearInterval(myTimer);
-    myTimer = window.setInterval(startTime, 1000);
+        window.clearInterval(myTimer);
+        myTimer = window.setInterval(startTime, 1000);
 }
 
 let secCircle = document.querySelector(".circle");
@@ -235,6 +230,7 @@ function startTime() {
         second.innerHTML = sec;
         minuts.innerHTML = min;
         playAlarm();
+        inaction();
     }
 }
 
@@ -246,16 +242,27 @@ function print(e) {
     }
 }
 
+idl = JSON.parse(localStorage.getItem("timeIdle"));
+let i = Number(idl);
+let sumI = (i*60);
 
-let mytime = mytime1 = 5;
-document.onmousemove = document.onkeydown = document.onscroll = function(){mytime = mytime1};
-setInterval(function(){
-    console.log(mytime);
-    mytime --;
-    if(mytime <=0 )
-        come_back();
-}, 1000);
+function inaction() {
+    let mytime = mytime1 = `${sumI}`;
+    console.log(sumI)
+    document.onmousemove = document.onkeydown = document.onscroll = function(){mytime = mytime1};
+    setInterval(function(){
+        console.log(mytime);
+        mytime --;
+        if(mytime <=0 )
+            come_back();
+    }, 1000);
+}
 
+
+function come_back() {
+    audio.src = arrSound[6];
+    audio.play();
+}
 
 
 
