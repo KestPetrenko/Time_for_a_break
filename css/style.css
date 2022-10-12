@@ -8,6 +8,10 @@
     background: rgba(36, 36, 38, 1);
 }
 
+* a {
+    text-decoration: none;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -440,6 +444,18 @@ body {
 
 .themeBody {
     background: rgb(217, 85, 80);
+}
+
+.about__wrapper {
+    margin-top: 20px;
+    padding: 60px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}
+
+.about__wrapper a {
+    color: #5151ea;
+    text-decoration: underline;
 }
 
 @media(max-width: 768px) {
