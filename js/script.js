@@ -163,6 +163,7 @@ function startPromodo() {
 
 timeLong.addEventListener("click", startLong)
 
+
 function startLong() {
     longTime = JSON.parse(localStorage.getItem("long"));
     timeShort.classList.remove("btn-auto");
