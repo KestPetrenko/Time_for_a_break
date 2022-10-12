@@ -209,16 +209,27 @@ body {
     background: rgba(245, 172, 14, 0.5);
 }
 
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    background: rgba(0, 0, 0 , 0.6);
+    z-index: 1;
+}
+
 .container_setting {
     position: absolute;
-    top: 50%;
+    top: 20px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 33vw;
     height: auto;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 2vw;
     padding: 1%;
+    z-index: 3;
 }
 
 .container__title {
@@ -297,6 +308,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
 }
 
 .div_music {
@@ -305,6 +317,7 @@ body {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
 }
 .notification {
     display: flex;
@@ -416,7 +429,7 @@ body {
 
 .btn-save {
     display: block;
-    margin: 50px auto;
+    margin: 25px auto;
     padding: 10px 40px;
 }
 
