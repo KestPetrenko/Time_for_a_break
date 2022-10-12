@@ -90,7 +90,7 @@
 
         </div>
         <div class="timer__start" data-theme="theme">
-            <button class="btn timer__start-btn">Start</button>
+            <button class="btn timer__start-btn btn-start">Start</button>
         </div>
     </div>
     <div class="timer__buttons" data-theme="theme">
@@ -115,7 +115,7 @@
             </div>
             <div class="short__break" data-theme="theme">
                 <h3 data-theme="theme" class="settings_h3">Short Break</h3>
-                <input type="number" name="" class="input_settings input_short" min="5" max="15" value="5">
+                <input type="number" name="" class="input_settings input_short" min="2" max="15" value="5">
             </div>
             <div class="long__break" data-theme="theme">
                 <h3 data-theme="theme" class="settings_h3">Long Break</h3>
@@ -145,15 +145,12 @@
         </div>
     </div>
     <div class="div_hour" data-theme="theme">
-        <h2 data-theme="theme">Time type</h2>
-        <select name="currency_hour" class="currency__hour" onchange="hourFunction()">
-            <option value="24_hour" selected>24 hour</option>
-            <option value="12_hour">12 hour</option>
-        </select>
+        <h2 data-theme="theme">Idle_reminder</h2>
+        <input type="number" name="" class="input_settings reminder" value="20" min="1" max="90">
     </div>
     <div class="notification">
         <h2 data-theme="theme">Remind the end</h2>
-        <input type="number" name="" class="input_settings notification_input" value="5" min="1" max="5">
+        <input type="number" name="" class="input_settings notification_input" value="5" min="1" max="10">
     </div>
 
     <div class="timer__save" data-theme="theme">
