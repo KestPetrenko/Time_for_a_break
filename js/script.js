@@ -1,4 +1,5 @@
 let containerSettings = document.querySelector(".container_setting");
+let modalWrapp = document.querySelector(".modal");
 let openSettings = document.querySelector(".open_settings");
 let inputPromodo = document.querySelector(".input_promodo");
 let inputShort = document.querySelector(".input_short");
@@ -32,14 +33,16 @@ let stop = document.querySelector(".btn_stop");
 openSettings.addEventListener("click", openMenuSettings);
 
 function openMenuSettings() {
-    containerSettings.classList.toggle("none")
+    containerSettings.classList.toggle("none");
+    modalWrapp.classList.toggle("none");
 }
 
 
 document.querySelector(".unicode").addEventListener("click", hideСontainerSetting);
 
 function hideСontainerSetting() {
-    containerSettings.classList.toggle("none")
+    containerSettings.classList.toggle("none");
+    modalWrapp.classList.toggle("none");
 }
 
 const changeThemes = document.querySelectorAll("[data-theme]");
