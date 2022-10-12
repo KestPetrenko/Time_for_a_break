@@ -8,6 +8,11 @@
     background: rgba(36, 36, 38, 1);
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     position: relative;
 }
@@ -214,7 +219,7 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vw;
+    height: 100vh;
     background: rgba(0, 0, 0 , 0.6);
     z-index: 1;
 }
