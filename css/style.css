@@ -429,6 +429,23 @@ body {
         width: 100%;
         padding: 10px 0;
     }
+    .container_setting {
+        width: 75%;
+        margin: 0 auto;
+    }
+    .input_settings {
+        padding: 5px;
+    }
+    .currency {
+        width: auto;
+    }
+    .currency__hour {
+        padding: 5px;
+    }
+    .toggle {
+        width: 6vw;
+        height: 3vw;
+    }
 }
 
 @media(max-width: 576px) {
